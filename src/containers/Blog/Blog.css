@@ -6,7 +6,7 @@
     padding: 0;
     width:  100%;
     text-align: center;
-    background-color: aqua;
+    background-color: rgba(187, 180, 218, 0.671);
 
 }
 
@@ -21,7 +21,8 @@
 }
 
 .Blog a:hover,
-.Blog a:active {
-    color: #ff2e2b;
+.Blog a:active,
+.Blog a.active {
+    color: #f50d09;
     
 }

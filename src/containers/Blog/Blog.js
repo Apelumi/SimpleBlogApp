@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 // import NewPost from './NewPost/NewPost';
 import './Blog.css';
 import Posts from './Posts/Posts';
-import { Route, Routes, Link } from "react-router-dom"
+import { Route, NavLink } from "react-router-dom"
 import NewPost from './NewPost/NewPost';
 
 
@@ -56,12 +56,17 @@ class Blog extends Component {
                 <header>
                     <nav>
                         <ul>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to={{
+                            <li><NavLink 
+                                to="/" 
+                                exact 
+                                activeClassName='my-active' 
+                                activeStyle={{color: "blueviolet", textDecoration: "underline"}}>Home</NavLink>
+                            </li>
+                            <li><NavLink to={{
                                 pathname: "/new-post",
                                 hash: "#submit", //these two atrributes won't work coz they are not doing anything on here
-                                search: "?quick-search-submit"
-                            }}>New Post</Link></li>
+                                search: "?quick-search=submit"
+                            }}>New Post</NavLink></li>
                         </ul>
                     </nav>
                 </header>
@@ -76,10 +81,10 @@ class Blog extends Component {
                 </section> */}
                 {/* <Posts /> */}
                 {/* <Route path='/' exact render = {() => console.log("some jsx code you want to render which in our case will be our page")}/> */}
-                <Routes>
-                    <Route path='/' exact element={<Posts />}/>
-                    <Route path='/new-post' element={<NewPost />} />
-                </Routes>
+                
+                
+                <Route path='/' exact component={Posts} />
+                <Route path='/new-post' component={NewPost} />
                 
             </div>
         );
