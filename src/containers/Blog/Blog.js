@@ -8,7 +8,7 @@ import './Blog.css';
 import Posts from './Posts/Posts';
 import { Route, NavLink, Switch } from "react-router-dom"
 import NewPost from './NewPost/NewPost';
-import FullPost from './FullPost/FullPost';
+// import FullPost from './FullPost/FullPost';
 
 
 class Blog extends Component {
@@ -58,10 +58,10 @@ class Blog extends Component {
                     <nav>
                         <ul>
                             <li><NavLink 
-                                to="/" 
+                                to="/posts/" 
                                 exact 
                                 activeClassName='my-active' 
-                                activeStyle={{color: "blueviolet", textDecoration: "underline"}}>Home</NavLink>
+                                activeStyle={{color: "blueviolet", textDecoration: "underline"}}>Posts</NavLink>
                             </li>
                             <li><NavLink to={{
                                 pathname: "/new-post",
@@ -84,9 +84,8 @@ class Blog extends Component {
                 {/* <Route path='/' exact render = {() => console.log("some jsx code you want to render which in our case will be our page")}/> */}
                 
                 <Switch>
-                    <Route path='/' exact component={Posts} />
                     <Route path='/new-post' component={NewPost} />
-                    <Route path='/posts/:id' component={FullPost} />
+                    <Route path='/posts'  component={Posts} />
                 </Switch>
                 
             </div>
