@@ -6,12 +6,15 @@ import React, { Component } from 'react';
 // import NewPost from './NewPost/NewPost';
 import './Blog.css';
 import Posts from './Posts/Posts';
-import { Route, NavLink, Switch } from "react-router-dom"
+import { Route, NavLink, Switch, Redirect } from "react-router-dom"
 import NewPost from './NewPost/NewPost';
 // import FullPost from './FullPost/FullPost';
 
 
 class Blog extends Component {
+    state = {
+        auth: false
+    }
     // state = {
     //     posts: [],
     //     postselectorId: null,
@@ -84,8 +87,10 @@ class Blog extends Component {
                 {/* <Route path='/' exact render = {() => console.log("some jsx code you want to render which in our case will be our page")}/> */}
                 
                 <Switch>
-                    <Route path='/new-post' component={NewPost} />
+                    { this.state.auth ? <Route path='/new-post' component={NewPost} /> : null }
                     <Route path='/posts'  component={Posts} />
+                    <Route render={() => (<hi>Page not found</hi>)} />
+                    {/* <Redirect from='/' to="/posts"/>  */}
                 </Switch>
                 
             </div>
