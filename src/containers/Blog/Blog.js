@@ -7,13 +7,18 @@ import React, { Component } from 'react';
 import './Blog.css';
 import Posts from './Posts/Posts';
 import { Route, NavLink, Switch, Redirect } from "react-router-dom"
-import NewPost from './NewPost/NewPost';
+import asyncComponent from '../../hoc/aysncComponent';
+// import NewPost from './NewPost/NewPost';
 // import FullPost from './FullPost/FullPost';
+
+const asyncNewpost = asyncComponent(() => {
+    return import('./NewPost/NewPost');
+})
 
 
 class Blog extends Component {
     state = {
-        auth: false
+        auth: true
     }
     // state = {
     //     posts: [],
@@ -87,7 +92,7 @@ class Blog extends Component {
                 {/* <Route path='/' exact render = {() => console.log("some jsx code you want to render which in our case will be our page")}/> */}
                 
                 <Switch>
-                    { this.state.auth ? <Route path='/new-post' component={NewPost} /> : null }
+                    { this.state.auth ? <Route path='/new-post' component={asyncNewpost} /> : null }
                     <Route path='/posts'  component={Posts} />
                     <Route render={() => (<hi>Page not found</hi>)} />
                     {/* <Redirect from='/' to="/posts"/>  */}
