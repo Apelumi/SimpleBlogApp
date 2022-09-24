@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 // import axios from 'axios';
 
 // import Post from '../../components/Post/Post';
@@ -7,13 +7,15 @@ import React, { Component } from 'react';
 import './Blog.css';
 import Posts from './Posts/Posts';
 import { Route, NavLink, Switch, Redirect } from "react-router-dom"
-import asyncComponent from '../../hoc/aysncComponent';
+// import asyncComponent from '../../hoc/aysncComponent';
 // import NewPost from './NewPost/NewPost';
 // import FullPost from './FullPost/FullPost';
 
-const asyncNewpost = asyncComponent(() => {
-    return import('./NewPost/NewPost');
-})
+// const AsyncNewpost = asyncComponent(() => {
+//     return import('./NewPost/NewPost');
+// })
+
+const AsyncNewpost = React.lazy(() => import('./NewPost/NewPost'));
 
 
 class Blog extends Component {
@@ -92,7 +94,12 @@ class Blog extends Component {
                 {/* <Route path='/' exact render = {() => console.log("some jsx code you want to render which in our case will be our page")}/> */}
                 
                 <Switch>
-                    { this.state.auth ? <Route path='/new-post' component={asyncNewpost} /> : null }
+                    { this.state.auth ? 
+                    <Route path='/new-post' render={() =>
+                        (<Suspense fallback={<div>IzLoading...</div>}>
+                            <AsyncNewpost />
+                        </Suspense>)} 
+                    /> : null }
                     <Route path='/posts'  component={Posts} />
                     <Route render={() => (<hi>Page not found</hi>)} />
                     {/* <Redirect from='/' to="/posts"/>  */}
